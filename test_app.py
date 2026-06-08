@@ -19,4 +19,4 @@ def test_add_task():
         content_type="application/json",
     )
 
-    assert response.status_code == 404
+    assert response.status_code == 201
