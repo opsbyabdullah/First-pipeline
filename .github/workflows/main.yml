@@ -34,7 +34,19 @@ jobs:
       - name: Run Tests
         run: pytest
       
+      - name: Login to docker hub
+        uses: docker/docker@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/python-ci-app:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/python-ci-app:latest      
 
 
         
